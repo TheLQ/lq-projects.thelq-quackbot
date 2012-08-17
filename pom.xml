@@ -14,6 +14,41 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<build>
+		<plugins>
+			<!--Makes sure License Headers are consistant across all files-->
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.10.b1</version>
+				<configuration>
+					<header>src/etc/license-header.txt</header>
+					<properties>
+						<email>lord.quackstar at gmail.com</email>
+						<name>Leon Blakey</name>
+						<year>2011</year>
+						<projectname>Quackbot</projectname>
+					</properties>
+					<excludes>
+						<exclude>**/*.txt</exclude>
+						<exclude>**/*.log</exclude>
+						<exclude>**/nbactions.xml</exclude>
+					</excludes>
+					<strictCheck>true</strictCheck>
+					<aggregate>true</aggregate>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 	<dependencies>
 		<dependency>
