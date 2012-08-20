@@ -16,6 +16,11 @@
 	</properties>
 	
 	<build>
+		<resources>
+			<resource>
+				<directory>src/etc</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<!--Makes sure License Headers are consistant across all files-->
 			<plugin>
@@ -44,6 +49,50 @@
 						<goals>
 							<goal>format</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--Make a deployable directory in the correct format-->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<!--Build jar with dependencies-->
+					<execution>
+						<id>make-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<classifier>standalone</classifier>
+							<finalName>${project.artifactId}</finalName>
+							<descriptorRefs>
+								<!--This keeps a lot of extra files in the jar, but is simple and quick-->
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>org.quackbot.impl.HibernateMain</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+					<!--Build deploy folder-->
+					<execution>
+						<id>make-folder</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>deploy-dir</finalName>
+							<descriptors>
+								<descriptor>src/etc/assembly-deploy.xml</descriptor>
+							</descriptors>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
