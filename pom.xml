@@ -76,6 +76,9 @@
 								<manifest>
 									<mainClass>org.quackbot.impl.HibernateMain</mainClass>
 								</manifest>
+								<manifestEntries>
+									<Class-Path>.</Class-Path>
+								</manifestEntries>
 							</archive>
 						</configuration>
 					</execution>
