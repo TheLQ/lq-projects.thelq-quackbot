@@ -60,5 +60,14 @@
 			</includes>
 			<outputDirectory>plugins</outputDirectory>
 		</fileSet>
+		<!--Include Resources-->
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources</directory>
+			<includes>
+				<include>*</include>
+				<include>*/*</include>
+			</includes>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
 	</fileSets>
 </assembly>
