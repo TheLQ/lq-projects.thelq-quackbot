@@ -45,7 +45,6 @@
 				</includes>
 				<excludes>
 					<exclude>META-INF/**</exclude>
-					<exclude>javassist/**</exclude>
 				</excludes>
 			</unpackOptions>
 		</dependencySet>
