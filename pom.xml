@@ -57,44 +57,29 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.3</version>
 				<executions>
-					<!--Build jar with dependencies-->
+					<!--Build mega-jar with dependencies-->
 					<execution>
-						<id>make-jar</id>
+						<id>make-jar2</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
 						<configuration>
+							<finalName>${project.artifactId}-standalone</finalName>
 							<appendAssemblyId>false</appendAssemblyId>
-							<classifier>standalone</classifier>
-							<finalName>${project.artifactId}</finalName>
-							<descriptorRefs>
-								<!--This keeps a lot of extra files in the jar, but is simple and quick-->
-								<descriptorRef>jar-with-dependencies</descriptorRef>
-							</descriptorRefs>
+							<attach>false</attach>
+							<descriptors>
+								<descriptor>src/etc/assembly-deploy.xml</descriptor>
+							</descriptors>
 							<archive>
 								<manifest>
 									<mainClass>org.quackbot.impl.HibernateMain</mainClass>
 								</manifest>
 								<manifestEntries>
 									<Class-Path>.</Class-Path>
+									<Class-Path>${project.artifactId}-standalone</Class-Path>
 								</manifestEntries>
 							</archive>
-						</configuration>
-					</execution>
-					<!--Build deploy folder-->
-					<execution>
-						<id>make-folder</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>deploy-dir</finalName>
-							<descriptors>
-								<descriptor>src/etc/assembly-deploy.xml</descriptor>
-							</descriptors>
 						</configuration>
 					</execution>
 				</executions>

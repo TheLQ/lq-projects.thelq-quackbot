@@ -26,19 +26,31 @@
 
 	<id>dir-with-resources</id>
 	<formats>
-		<format>dir</format>
+		<format>jar</format>
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
 
+	<!--Include all dependencies-->
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>/</outputDirectory>
+			<useProjectArtifact>true</useProjectArtifact>
+			<unpack>true</unpack>
+			<scope>runtime</scope>
+			<unpackOptions>
+				<includes>
+					<include>**/*.class</include>
+					<include>META-INF/maven/org.thelq/**</include>
+				</includes>
+				<excludes>
+					<exclude>META-INF/**</exclude>
+					<exclude>javassist/**</exclude>
+				</excludes>
+			</unpackOptions>
+		</dependencySet>
+	</dependencySets>
+
 	<fileSets>
-		<!--Include Main Jar-->
-		<fileSet>
-			<directory>${project.basedir}/target</directory>
-			<outputDirectory>.</outputDirectory>
-			<includes>
-				<include>${project.artifactId}.jar</include>
-			</includes>
-		</fileSet>
 		<!--Include JSPlugins-->
 		<fileSet>
 			<directory>${project.basedir}/src/main/scripts</directory>
