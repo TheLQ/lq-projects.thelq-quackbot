@@ -40,6 +40,7 @@
 			<unpackOptions>
 				<includes>
 					<include>**/*.class</include>
+					<include>**/*.xml</include>
 					<include>META-INF/maven/org.thelq/**</include>
 				</includes>
 				<excludes>
